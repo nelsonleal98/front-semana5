@@ -9,11 +9,10 @@
 
             <ul class="navBar">
                 <li><a href="#banner">Inicio</a></li>
-                <li><a href="#about">Quienes Somos</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#equipo">Equipo</a></li>
-                <li><a href="#hogar"> <button onclick="document.getElementById('botonLogin').style.display='block'" style="width:auto;" class="button1">Login</button> </a></li>
+                <li><a href="#"> <button onclick="document.getElementById('botonLogin').style.display='block'" style="width:auto;" class="button1">Login</button> </a></li>
             </ul>
 
         </nav>
@@ -23,30 +22,60 @@
 <!-- Boton Login Form -->
 	<div id="botonLogin" class="popLogin"> 
 
-		<form class="contenidoLogin" action="/action_page.php"> 
-
+		<v-form
+      ref="form"
+      v-model="form"
+      class="contenidoLogin"
+      >
             <div class="imgBox"> 
 				<span onclick="document.getElementById('botonLogin').style.display='none'" class="close">×</span> 
 			</div> 
 
 			<div class="container"> 
 				<label><b>Usuario o e-mail</b></label> 
-				<input class="input-t" v-model="login.email" type="text" placeholder="Escribe tu usuario o email" name="uname" required> 
+        <v-text-field
+                        v-model="login.email"
+                        :rules="[rules.email]"
+                        placeholder="name@example.com"
+                        type="email"
+                      ></v-text-field>
+				<!-- <input class="input-t" v-model="login.email" type="text" placeholder="Escribe tu usuario o email" name="uname" required>  -->
 
 				<label><b>Contraseña</b></label> 
-				<input class="input-p" @keyup.enter="iniciarSesion" v-model="login.password"  type="password" placeholder="Escribe tu contraseña" name="psw" required> 
-
+        <v-text-field
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        v-model="login.password"
+                        :rules="[rules.required]"
+                        placeholder="Escribe tu contraseña"
+                        :type="show1 ? 'text' : 'password'"
+                        @click:append="show1 = !show1"
+                        @keyup.enter="iniciarSesion"
+                      ></v-text-field>
+				<!-- <input class="input-p" @click:append="show1 = !show1" @keyup.enter="iniciarSesion" v-model="login.password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'"  placeholder="Escribe tu contraseña" name="psw" required>  -->
+        
 			</div> 
-       <div class="container" style="background-color:#f1f1f1"> 
-				<button @click="iniciarSesion" type="button" class="registratebtn" >Iniciar Sesión</button> 
+       <div class="container" style="background-color:white"> 
+        <v-btn
+                :disabled="!form"
+                  type="button"
+                  class="button"
+                  color= "#0088A9"
+                  @click="iniciarSesion"
+                >
+                  Iniciar Sesión
+                </v-btn>
+				<!-- <button @click="iniciarSesion" type="button" class="button" >Iniciar Sesión</button>  -->
        </div>     
-		</form> 
+		</v-form>
 	</div> 
+
+  <!-- --------------- Sección de Banner y Slider ---------------  -->
   <section class="banner" id="banner">
       <div class="cont-slider">
       <v-app id="inspire">
           
             <v-carousel hide-delimiters
+            show-arrows-on-hover
             height="750">
             <v-carousel-item
                 v-for="(item,i) in items"
@@ -124,7 +153,7 @@
         </div>
 
         <div class="masServ">
-            <a href="#" class="mas">Ver Mas</a>
+            <a href="/servicios" class="mas">Ver Mas</a>
         </div>
     </section>
 
@@ -333,6 +362,14 @@
     name: 'PrincipalPage',
  data: () => ({
      current: 0,
+     show1: false,
+     show1: false,
+      form: false,
+      email: undefined,
+      rules: {
+        email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
+        required: v => !!v || 'This field is required',
+      },
      login:{
               email: '',
               password: '',
@@ -1082,5 +1119,58 @@ span.psw {
 .button:hover {
   opacity: 0.8;
 }
+
+/* -------------------- ESTILOS PAGINA DE SERVICIOS DETALLADOS ------------------ */
+
+.servicesSheet {
+  padding: 10px 100px;
+}
+
+.detailServ {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(./images/section1.jpg);
+  background-size: cover;
+}
+
+.contenedorServ {
+  position: relative;
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100px;
+  flex-wrap: wrap;
+}
+
+.contenedorServ p {
+  color: black;
+}
+
+.contenedorServ .serv {
+  position: relative;
+  background-color: white;
+  max-width: 1000px;
+  margin: 10px;
+  padding: 15px;
+  display: flex;
+}
+
+.contenedorServ .serv .boxServ {
+  max-width: 150px;
+  flex: 0 0 150px;
+}
+
+.contenedorServ .serv .boxServ img {
+  max-width: 100%;
+  height: 150px;
+}
+
+.contenedorServ .serv .contenidoServ {
+  margin-left: 20px;
+}
+
 
 </style>

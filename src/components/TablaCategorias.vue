@@ -42,6 +42,11 @@
   
               <v-card-text>
                 <v-container>
+                  <v-form
+                  ref="form"
+                  v-model="form"
+                  class="pa-4 pt-6"
+                  >
                   <v-row>
                       <v-text-field
                         v-model="editedItem.nombre"
@@ -52,10 +57,11 @@
                       <v-textarea
                         v-model="editedItem.descripcion"
                         label="Descripción"
-                        counter="240"
+                        counter="254"
+                        :rules="[rules.length(255)]"
                       ></v-textarea>
                   </v-row>
-                  
+                  </v-form>
                 </v-container>
               </v-card-text>
   
@@ -69,6 +75,7 @@
                   Cancel
                 </v-btn>
                 <v-btn
+                 :disabled="!form"
                   color="blue darken-1"
                   text
                   @click="save"
@@ -126,6 +133,10 @@ export default {
     dialogDelete: false,
     cargando: true,
     iconocambio: '',
+    form: false,
+     rules: {
+      length: len => v => (v || '').length < len || `Ha llegado al maximo de caracteres ${len}`,
+    },
     headers: [
       {
         text: 'Categoria',
