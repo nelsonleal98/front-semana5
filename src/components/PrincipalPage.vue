@@ -1,6 +1,6 @@
 <template>
     <div class="container-principal">
-   
+
 <div id="header" class="header">
 
         <a href="#inicio" class="logo">Reclute<span>Me</span></a>
@@ -20,19 +20,19 @@
 </div>
 
 <!-- Boton Login Form -->
-	<div id="botonLogin" class="popLogin"> 
+	<div id="botonLogin" class="popLogin">
 
 		<v-form
       ref="form"
       v-model="form"
       class="contenidoLogin"
       >
-            <div class="imgBox"> 
-				<span onclick="document.getElementById('botonLogin').style.display='none'" class="close">×</span> 
-			</div> 
+            <div class="imgBox">
+				<span onclick="document.getElementById('botonLogin').style.display='none'" class="close">×</span>
+			</div>
 
-			<div class="container"> 
-				<label><b>Usuario o e-mail</b></label> 
+			<div class="container">
+				<label><b>Usuario o e-mail</b></label>
         <v-text-field
                         v-model="login.email"
                         :rules="[rules.email]"
@@ -41,7 +41,7 @@
                       ></v-text-field>
 				<!-- <input class="input-t" v-model="login.email" type="text" placeholder="Escribe tu usuario o email" name="uname" required>  -->
 
-				<label><b>Contraseña</b></label> 
+				<label><b>Contraseña</b></label>
         <v-text-field
                         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                         v-model="login.password"
@@ -52,9 +52,9 @@
                         @keyup.enter="iniciarSesion"
                       ></v-text-field>
 				<!-- <input class="input-p" @click:append="show1 = !show1" @keyup.enter="iniciarSesion" v-model="login.password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'"  placeholder="Escribe tu contraseña" name="psw" required>  -->
-        
-			</div> 
-       <div class="container" style="background-color:white"> 
+
+			</div>
+       <div class="container" style="background-color:white">
         <v-btn
                 :disabled="!form"
                   type="button"
@@ -65,15 +65,15 @@
                   Iniciar Sesión
                 </v-btn>
 				<!-- <button @click="iniciarSesion" type="button" class="button" >Iniciar Sesión</button>  -->
-       </div>     
+       </div>
 		</v-form>
-	</div> 
+	</div>
 
   <!-- --------------- Sección de Banner y Slider ---------------  -->
   <section class="banner" id="banner">
       <div class="cont-slider">
       <v-app id="inspire">
-          
+
             <v-carousel hide-delimiters
             show-arrows-on-hover
             height="750">
@@ -87,7 +87,7 @@
               align="center"
               justify="center"
             >
-              <div 
+              <div
               align="center"
               justify="center"
               class="info-slider"
@@ -104,7 +104,7 @@
 
     </section>
 <!-- --------------- Sección de Servicios ---------------  -->
-    
+
     <section class="servicios" id="servicios">
         <div class="tituloServicios">
 
@@ -114,42 +114,17 @@
         </div>
 
         <div class="tresServ">
-            <div class="box">
+            <div class="box" v-for="(articulo, index) of articulos" :key="index">
 
                 <div class="imgServ">
-                    <img src="./images/serv1.jpg" alt="">
+                    <img :src="articulo.urlImagen" alt="">
                 </div>
-                
+
                 <div class="nombreServicio">
-                    <h3>Talento en Redes</h3>
+                    <h3>{{articulo.nombre}}</h3>
                 </div>
 
             </div>
-
-            <div class="box">
-
-                <div class="imgServ">
-                    <img src="./images/serv2.jpg" alt="">
-                </div>
-                
-                <div class="nombreServicio">
-                    <h3>Reclutamiento</h3>
-                </div>
-
-            </div>
-
-            <div class="box">
-
-                <div class="imgServ">
-                    <img src="./images/serv3.jpg" alt="">
-                </div>
-                
-                <div class="nombreServicio">
-                    <h3>Capacitaciones</h3>
-                </div>
-
-            </div>
-            
         </div>
 
         <div class="masServ">
@@ -175,7 +150,7 @@
                 </div>
 
                 <div class="textTest">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi expedita perferendis quisquam, molestias cumque impedit vitae dolorum inventore adipisci aperiam aut minima veritatis provident illo. Nam voluptas adipisci vero ea. Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                    <p>Mi empresa necesitaba la capacitación para el manejo de redes sociales. Desde hace mucho tiempo queriamos incluir nuestro catalogo en plataformas como Instagram y lo que ofrecen fue justo lo que necesitamos. Alcanzamos mas de 1000 seguidores en un mes y ya realizamos pedidos por la plataforma ¡Recomendados! </p>
 
                     <h3>CEO Postobon</h3>
                 </div>
@@ -189,14 +164,14 @@
                 </div>
 
                 <div class="textTest">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi expedita perferendis quisquam, molestias cumque impedit vitae dolorum inventore adipisci aperiam aut minima veritatis provident illo. Nam voluptas adipisci vero ea. Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                    <p>Desde hace tiempo buscábamos una empresa que nos ayudara con el proceso de selección para nuevos trabajadores y que nos permitiera reclutar personas desde diferentes plataformas digitales y personas con experiencias personales y profesionales. RecluteMe le permitió a nuestra empresa traer nuevos talentos y darle la oportunidad a muchos jóvenes de tener su primer empleo. </p>
 
                     <h3>CEO Petrobras</h3>
                 </div>
-                
-            </div>
 
-            <div class="box">
+            </div>
+<!-- 
+            <div class="box" >
 
                 <div class="imgTest">
                     <img src="./images/tes3.jpg" alt="">
@@ -207,12 +182,12 @@
 
                     <h3>CEO Imusa</h3>
                 </div>
-                
-            </div>
+
+            </div> -->
 
         </div>
 
-        
+
 
     </section>
 
@@ -227,70 +202,20 @@
     </div>
 
     <div class="integrantes">
-        <div class="box">
+        <div class="box" v-for="(member, index) of Equipo" :key="index">
 
             <div class="imgTeams">
-                <img src="./images/Daniel.png" alt="">
+                <img :src="member.imagen" alt="">
             </div>
 
             <div class="integrante">
-                <h3>Daniel</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <h3>{{member.codigo}} {{member.nombre}}</h3>
+                <h3> <b>{{member.rol}}</b> </h3>
+                <p>{{member.descripcion}}</p>
             </div>
 
         </div>
 
-        <div class="box">
-            
-            <div class="imgTeams">
-                <img src="./images/Luis.png" alt="">
-            </div>
-
-            <div class="integrante">
-                <h3>Luis Alberto</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-
-        </div>
-
-        <div class="box">
-            
-            <div class="imgTeams">
-                <img src="./images/Luisa.png" alt="">
-            </div>
-
-            <div class="integrante">
-                <h3>Luisa</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-
-        </div>
-
-        <div class="box">
-            
-            <div class="imgTeams">
-                <img src="./images/Nelson.png" alt="">
-            </div>
-
-            <div class="integrante">
-                <h3>Nelson</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-
-        </div>
-
-        <div class="box">
-            
-            <div class="imgTeams">
-                <img src="./images/Miguel.png" alt="">
-            </div>
-
-            <div class="integrante">
-                <h3>Miguel</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-
-        </div>
 
     </div>
 </section>
@@ -302,10 +227,10 @@
 
         <a href="#banner" class="logoFooter">Todo<span>Tech</span></a>
         <p>Empresa dedicada a la venta de tecnología. Especializada en partes para computadores personales para el hogar y la oficina, perifericos, matenimientos y reparaciones.</p>
-    
+
     </div>
 
-    <div class="footerI">
+    <!-- <div class="footerI">
             <li>
             <h2>Nuestros Productos</h2>
 
@@ -317,10 +242,10 @@
                 <li><a href="#">Camaras</a></li>
             </ul>
             </li>
-    </div>
+    </div> -->
 
     <div class="footerI">
-        <li>   
+        <li>
             <h2>Mapa del Sitio</h2>
 
             <ul class="lista">
@@ -331,7 +256,7 @@
                 <li><a href="#oficina">Oficina</a></li>
                 <li><a href="#hogar">Hogar</a></li>
             </ul>
-        </li> 
+        </li>
 
     </div>
 
@@ -357,10 +282,12 @@
 </template>
 
 <script>
-
+import axios from 'axios'
   export default {
     name: 'PrincipalPage',
  data: () => ({
+     articulos: null,
+     articulosV: null,
      current: 0,
      show1: false,
      show1: false,
@@ -392,15 +319,58 @@
           text: 'Así es, las redes sociales son el nuevo Boom del siglo XXI en procesos de selección y empleabilidad',
         },
       ],
-          
+      Equipo:[
+        {
+          codigo:1,
+          nombre:'Nelson Leal',
+          descripcion: 'Ingeniero en Telecomunicaciones egresado de la Universidad de Pamplona, con conocimiento en redes, programación e infrastructura soporte bajo RITEL. Originario de la ciudad de Cúcuta',
+          rol:'Arquitecto de Software',
+          imagen:"./images/Nelson.png"
+        },
+        {
+          codigo:2,
+          nombre:'Luis Monsalve',
+          descripcion: 'Lic. en Matemáticas egresado de la Universidad Industrial de Santander. Experto en la enseñanza de aplicaciones en matemáticas y estadística. Originario de la ciudad de Barranquilla.',
+          rol:'Desarrollador Frontend',
+          imagen:"./images/Luis.png"
+        },
+        {
+          codigo:3,
+          nombre:'Daniel Hermosilla',
+          descripcion: 'Estudiante de Ingeniería de Sistemas de la Universidad de Cundinamarca con conocimiento en desarrollo de videojuegos y web. Originario de la ciudad de Zipaquirá',
+          rol:'Tester',
+          imagen:"./images/Daniel.png"
+        },
+        {
+          codigo:4,
+          nombre:'Miguel Sandoval',
+          descripcion: 'Ingeniero de sistemas, conocimientos en educación y desarrollo del pensamiento computacional. Originario de la ciudad de Bogotá',
+          rol:'Analista de Software',
+          imagen:"./images/Miguel.png"
+        },
+        {
+          codigo:5,
+          nombre:'Luisa Pedraza',
+          descripcion: 'Ingeniera Electrónica egresada de la Universidad Incca de Colombia, con conocimientos en el área de control y automatización. Originaria de la ciudad de Bogotá',
+          rol:'Desarrollador Backend',
+          imagen:"./images/Luisa.png"
+        }
+      ],
+
  }),
-      
-  
+      created(){
+            this.$axios.get('/articulo/list')
+              .then( (response) => {
+                  this.articulos = response.data.slice(0,3)
+                  
+              })
+        },
+
   methods:{
-            
+
           async iniciarSesion(){
               //Funcion de iniciar sesion
-              
+
             try{
                 /* Esto funciona
                 let response = await this.$axios.post( '/usuario/login', this.login )
@@ -425,7 +395,7 @@
                     swal("Oops!", "Usuario o Contraseña incorrectos o inactivos!", "error");
                 })
 
-                
+
             }catch (error){
                 swal("Oops!", "Something went wrong!", "error");
             }
@@ -705,6 +675,7 @@ p {
 
 .servicios .tresServ .box .nombreServicio {
   padding-top: 15px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -713,6 +684,7 @@ p {
 
 .servicios .tresServ .box .nombreServicio h3 {
   font-weight: 400;
+  text-align: center;
 }
 
 .servicios {
@@ -840,7 +812,7 @@ p {
 .equipo .integrantes .box {
   width: 340px;
   margin: 20px;
-  padding: 40px;
+  padding: 20px;
   background: white;
   display: flex;
   justify-content: center;
@@ -871,7 +843,7 @@ p {
 .equipo .integrantes .box .integrante h3 {
   font-weight: 400;
   font-size: 1.7em;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .equipo .integrantes .box .integrante p {
@@ -879,6 +851,7 @@ p {
   font-weight: 200;
   font-size: 1em;
   margin-top: 5px;
+  text-align: justify;
 }
 
 .equipo .tituloTeams h2 {
@@ -910,6 +883,7 @@ p {
 
 .footerI p {
   color: black;
+  text-align: justify;
 }
 
 .footer .footerI {

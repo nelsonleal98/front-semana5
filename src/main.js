@@ -11,7 +11,7 @@ import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false
 
 const axiosConfig = {
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://reclute-me-back.herokuapp.com/api',
   timeout: 30000,
 }
 

@@ -11,7 +11,7 @@
                 <li><a href="/#servicios">Servicios</a></li>
                 <li><a href="/#testimonios">Testimonios</a></li>
                 <li><a href="/#equipo">Equipo</a></li>
-                <li><a href="#servicios"> <button onclick="document.getElementById('botonLogin').style.display='block'" style="width:auto;" class="button1">Login</button> </a></li>
+                <li><a href="#detailServ"> <button onclick="document.getElementById('botonLogin').style.display='block'" style="width:auto;" class="button1">Login</button> </a></li>
             </ul>
 
         </nav>
@@ -72,83 +72,16 @@
 
     <section class="detailServ" id="detailServ">
 
-        <div class="contenedorServ">
-            <div class="serv">
+        <div class="contenedorServ" >
+            <div class="serv" v-for="(articulo, index) of articulos" :key="index">
 
                 <div class="boxServ">
-                    <img src="https://image.freepik.com/psd-gratis/diseno-sitios-web-su-negocio_24972-394.jpg" alt="">
+                    <img :src="articulo.urlImagen" alt="">
                 </div>
 
                 <div class="contenidoServ">
-                    <h2>Páginas Web</h2>
-                    <p>Creamos para tu organización páginas web con todo lo necesario para que lleves tu proceso de selección, incluimos un manejo de base de datos, visible desde cualquier dispositivo y con una alta calidad de diseño y operatividad.</p>
-                </div>
-
-            </div>
-
-            <div class="serv">
-
-                <div class="boxServ">
-                    <img src="./images/ref6.jpg" alt="">
-                </div>
-
-                <div class="contenidoServ">
-                    <h2>Capacitación LinkedIn</h2>
-                    <p>¿Buscas como encontrar talento de primera en la red laboral mas grande del mundo? Capacitamos tu personal de recursos humanos para que utilicen de la manera mas eficiente la red laboral Linkedin. Te ofrecemos mas de 50 horas de capacitación sicrónica y asincrónica para que encuentres el mejor personal para tu empresa.</p>
-                </div>
-
-            </div>
-
-            <div class="serv">
-
-                <div class="boxServ">
-                    <img src="./images/ref5.jpg" alt="">
-                </div>
-
-                <div class="contenidoServ">
-                    <h2>Networking Empresarial</h2>
-                    <p>En el mundo empresarial globalizado es importante que establezcan una red de contactos fiable y específica para la rama laboral de tu empresa. Te ofrecemos mas de 100 conexiones empresariales para tu compañía y tus empleados.</p>
-                </div>
-
-            </div>
-
-            <div class="serv">
-
-                <div class="boxServ">
-                    <img src="./images/ref4.jpg" alt="">
-                </div>
-
-                <div class="contenidoServ">
-                    <h2>Facebook e Instragam Business</h2>
-                    <p>¿Que esperas para que tus negocios hagan una entrada triunfal a las redes sociales? Te ofrecemos el montaje y la asesoría para lanzar tu empresa a las redes sociales. En este servicio aprenderas como promoverte, como crear feeds que impacten, crear un catalogo virtual para Instagram y mucho mas.</p>
-                </div>
-
-            </div>
-
-            <div class="serv">
-
-                <div class="boxServ">
-                    <img src="./images/ref3.jpg" alt="">
-                </div>
-
-                <div class="contenidoServ">
-                    <h2>Talento en redes</h2>
-                    <p>Te brindamos completo soporte en la busqueda de talento mediante las redes sociales. En el mundo laboral millones de personas promocionan su talento mediante las redes (Facebook e instagram), te enseñamos como identificar el mejor talento para tu empresa y como hacer un chequeo de antecedentes para que incorpores lo mejor a tu negocio.
-
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="serv">
-
-                <div class="boxServ">
-                    <img src="./images/ref2.jpg" alt="">
-                </div>
-
-                <div class="contenidoServ">
-                    <h2>Capacitación en procesos de selección</h2>
-                    <p>Verificar que los futuros empleados que apliquen a tu empresa sean lo que necesitas para mejorar tu producción es fundamental para que alcances tus objetivos empresariales. Te ofrecemos una capacitación de 100 horas para tu equipo de recursos humanos en como utilizar las redes para verificar antecedentes, conseguir referencias, contactar talento y mucho más.</p>
+                    <h2>{{articulo.nombre}}</h2>
+                    <p>{{articulo.descripcion}}</p>
                 </div>
 
             </div>
@@ -222,6 +155,7 @@
 export default {
     name: 'ServiciosSeccion',
     data: () => ({
+    articulos: null,
      current: 0,
      show1: false,
      show1: false,
@@ -236,7 +170,13 @@ export default {
               password: '',
           },
  }),
-      
+       created(){
+            this.$axios.get('/articulo/list')
+              .then( (response) => {
+                  this.articulos = response.data
+                  
+              })
+        },
   
   methods:{
             
