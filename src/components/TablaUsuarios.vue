@@ -42,6 +42,11 @@
 
               <v-card-text>
                 <v-container>
+                  <v-form
+                  ref="form"
+                  v-model="form"
+                  class="pa-4 pt-6"
+                  >
                   <v-row>
                       <v-text-field
                         v-model="editedItem.nombre"
@@ -52,7 +57,9 @@
                       <v-text-field
                       :disabled= habilitarCampos
                         v-model="editedItem.email"
+                        :rules="[rules.email]"
                         label="Correo electronico"
+                        type="email"
                       ></v-text-field>
                   </v-row>
                   <v-row>
@@ -67,15 +74,18 @@
                         :disabled= deactivatecheck
                         v-model="checkbox"
                         @click="activarPass"
-                        :label="`Cambiar contraseña: ${checkbox.toString()}`"
+                        :label="`Cambiar contraseña:`"
                       ></v-checkbox>
                       <v-text-field
                         v-model="limpiarPass"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                         :disabled= habilitarCambioPass
                         label="Contraseña"
+                        :type="show1 ? 'text' : 'password'"
+                        @click:append="show1 = !show1"
                       ></v-text-field>
                   </v-row>
-
+                </v-form>
                 </v-container>
               </v-card-text>
 
@@ -89,6 +99,7 @@
                   Cancel
                 </v-btn>
                 <v-btn
+                :disabled="!form"
                   color="blue darken-1"
                   text
                   @click="save"
@@ -153,6 +164,13 @@ export default {
     habilitarCambioPass: true,
     habilitarCampos: true,
     limpiarPass: '',
+    show1: false,
+    form: false,
+    email: undefined,
+    rules: {
+      email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
+      required: v => !!v || 'This field is required',
+    },
     headers: [
       {
         text: 'Usuarios registrados',
