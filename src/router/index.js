@@ -1,18 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import About from '../views/About.vue'
+import Principal from '../views/Principal.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/',
+    name: 'Principal',
+    component: Principal
   },
   {
-    path: '/categorias',
+    path: '/administracion',
+    name: 'Administracion',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    
+    children: [
+        {
+    path: 'categorias',
     name: 'Categorias',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -23,7 +31,7 @@ const routes = [
     }
   },
   {
-    path: '/usuarios',
+    path: 'usuarios',
     name: 'Usuarios',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -34,7 +42,18 @@ const routes = [
     }
   },
   {
-    path: '/home',
+    path: 'articulos',
+    name: 'Articulos',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Articulos.vue'),
+    meta:{
+      requireAuth : true
+    }
+  },
+  {
+    path: 'home',
     name: 'Home',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -44,6 +63,13 @@ const routes = [
       requireAuth : true
     }
   },
+    ],
+    component: () => import(/* webpackChunkName: "about" */ '../views/Administracion.vue'),
+    meta:{
+      requireAuth : true
+    }
+  },
+  
   {
     path: '/login',
     name: 'Login',
@@ -68,7 +94,7 @@ router.beforeEach( (to,from,next) =>{
         next();
       }else{
         next({
-          path: '/login'
+          path: '/'
         });
       }
     }else{

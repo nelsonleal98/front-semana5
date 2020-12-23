@@ -47,15 +47,17 @@ export default {
                 .then((response) =>{
                     let token = response.data.tokenReturn;
                     let usuario = response.data.user;
+                    let razon = response.data.reason;
                     if(token){
                         localStorage.setItem('token', token)
                         localStorage.setItem('usuario',JSON.stringify(usuario))
                         swal("Exito!", "Ha iniciado sesión correctamente!", "success");
-                        this.$router.push('/home')
+                        this.$router.push('/administracion/home')
                     }
+
                 })
                 .catch(error =>{
-                    swal("Oops!", "Usuario o Contraseña incorrectas!", "error");
+                    swal("Oops!", "Usuario o Contraseña incorrectos o inactivos!", "error");
                 })
 
                 
